@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How I Fought Back Against Reddit Blocking! 🚀</title>
+    <style>
+        :root {
+            --primary-color: #bb86fc;
+            --secondary-color: #03dac6;
+            --bg-color: #121212;
+            --surface-color: #1e1e1e;
+            --text-color: #ffffff;
+            --text-secondary: #b0b0b0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+        }
+
+        .nav-sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+            background-color: var(--surface-color);
+            padding: 2rem;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+            overflow-y: auto;
+        }
+
+        .nav-sidebar a {
+            display: block;
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 0.5rem 0;
+            margin: 0.5rem 0;
+            transition: color 0.3s;
+        }
+
+        .nav-sidebar a:hover {
+            color: var(--primary-color);
+        }
+
+        .main-content {
+            margin-left: 250px;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            background-color: var(--surface-color);
+            color: var(--text-color);
+            padding: 2rem 0;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        h1, h2, h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        header h1 {
+            color: var(--primary-color);
+            margin: 0;
+            padding: 0 2rem;
+        }
+
+        .section {
+            background: var(--surface-color);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            border: 1px solid #333;
+        }
+
+        .step {
+            margin-bottom: 2rem;
+        }
+
+        .step-number {
+            background-color: var(--primary-color);
+            color: var(--bg-color);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            display: inline-block;
+            margin-right: 1rem;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin: 1rem 0;
+            border: 2px solid var(--secondary-color);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        img:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 12px rgba(3, 218, 198, 0.3);
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90vh;
+            margin: auto;
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: 3px solid var(--secondary-color);
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(187, 134, 252, 0.5);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 35px;
+            color: var(--text-color);
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .modal-close:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Animation */
+        @keyframes zoomIn {
+            from {
+                transform: translate(-50%, -50%) scale(0.1);
+            }
+            to {
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+
+        .zoom-in {
+            animation: zoomIn 0.3s ease-out;
+        }
+
+        .technical-note {
+            background-color: rgba(187, 134, 252, 0.1);
+            border-left: 4px solid var(--primary-color);
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .emoji {
+            font-size: 1.5em;
+            margin-right: 0.5rem;
+        }
+
+        .frustration {
+            color: var(--secondary-color);
+            font-style: italic;
+            margin: 1rem 0;
+        }
+
+        .os-specific {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            border: 1px solid var(--secondary-color);
+        }
+
+        .os-specific h4 {
+            color: var(--secondary-color);
+            margin-top: 0;
+        }
+
+        .troubleshooting-note {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: rgba(3, 218, 198, 0.1);
+            border-radius: 4px;
+        }
+
+        code {
+            background: rgba(187, 134, 252, 0.2);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Consolas', monospace;
+            color: var(--secondary-color);
+        }
+
+        .os-specific ol li {
+            margin-bottom: 0.8rem;
+        }
+
+        .os-specific ul li {
+            margin: 0.5rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .nav-sidebar {
+                display: none;
+            }
+            .main-content {
+                margin-left: 0;
+            }
+            .container {
+                padding: 1rem;
+            }
+            .section {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav-sidebar">
+        <h2>Quick Links</h2>
+        <a href="#overview">🏠 Overview</a>
+        <a href="#problem">😤 The Problem</a>
+        <a href="#browsers">🌐 Browser Drama</a>
+        <a href="#dns-solution">🛠️ The DNS Fix</a>
+        <a href="#success">✨ Sweet Success</a>
+        <a href="#tech-notes">📝 Tech Notes</a>
+    </nav>
+
+    <div class="main-content">
+        <header>
+            <h1>🚫 Reddit Blocked?! Here's How I Fixed It! 🎉</h1>
+        </header>
+
+        <div class="container">
+            <div class="section" id="overview">
+                <h2>🏠 Overview</h2>
+                <p>Hey there! If you're reading this, you're probably as frustrated as I was when Reddit suddenly stopped working in Vietnam. But don't worry - I've got your back! Here's how I went from "Reddit is down?!" to "Reddit is back, baby!" 🎉</p>
+            </div>
+
+            <div class="section" id="problem">
+                <h2>😤 The Problem</h2>
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <h3>The Dreaded Block</h3>
+                    <p class="frustration">There I was, trying to browse Reddit like any normal day, when suddenly...</p>
+                    <img src="https://imgur.com/tmPZ24B.png" alt="Initial Reddit access error">
+                </div>
+            </div>
+
+            <div class="section" id="browsers">
+                <h2>🌐 Browser Drama</h2>
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <h3>The Great Browser Hunt</h3>
+                    <p class="frustration">Tried Chrome? Nope. Firefox? Nada. Edge? Come on! 😫</p>
+                    <img src="https://imgur.com/Olk6zai.png" alt="Browser testing results">
+                    
+                    <p class="frustration">Just to make sure it wasn't my connection, I tried a VPN - and Reddit worked! So it was definitely an ISP thing. 🕵️‍♂️</p>
+                    
+                    <p class="frustration">But then... I remembered that one special browser that's all about privacy... 😏</p>
+                    <img src="https://imgur.com/6uqDmj2.png" alt="Special browser success">
+                    <p>Interesting... very interesting... 🤔</p>
+                </div>
+            </div>
+
+            <div class="section" id="dns-solution">
+                <h2>🛠️ The DNS Fix</h2>
+                <div class="technical-note">
+                    <strong>🤓 Quick DNS Explainer:</strong>
+                    <p>Think of DNS as the internet's phone book - it turns website names into addresses. By changing our DNS provider, we're basically asking someone else to look up those addresses for us!</p>
+                </div>
+
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <h3>The Magic Settings ✨</h3>
+                    
+                    <div class="os-specific">
+                        <h4>🪟 Windows Instructions:</h4>
+                        <ol>
+                            <li>Right-click on the Windows Start button (bottom left corner) and click "Settings"</li>
+                            <li>Click on "Network & Internet"</li>
+                            <li>Click on "Wi-Fi" or "Ethernet" (depending on how you connect)</li>
+                            <li>Find your current connection and click on it
+                                <ul>
+                                    <li>For Wi-Fi: Click on your network name</li>
+                                    <li>For Ethernet: Click on your ethernet connection</li>
+                                </ul>
+                            </li>
+                            <li>Under "IP settings", click "Edit"</li>
+                            <li>Change "Automatic (DHCP)" to "Manual"</li>
+                            <li>Turn on "IPv4"</li>
+                            <li>Now for the magic numbers! 🎯
+                                <ul>
+                                    <li>✨ Preferred DNS: <code>1.1.1.1</code> (Cloudflare's primary)</li>
+                                    <li>✨ Alternate DNS: <code>1.0.0.1</code> (Cloudflare's backup)</li>
+                                </ul>
+                            </li>
+                            <li>Click "Save" and you're done! 🎉</li>
+                        </ol>
+                        <img src="https://imgur.com/SAkKdxb.png" alt="DNS configuration settings">
+                        
+                        <div class="troubleshooting-note">
+                            <p>💡 If it doesn't work right away:</p>
+                            <ul>
+                                <li>Try opening Command Prompt (search for "cmd")</li>
+                                <li>Type <code>ipconfig /flushdns</code> and hit Enter</li>
+                                <li>Restart your browser</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="os-specific">
+                        <h4>🍎 Mac Instructions:</h4>
+                        <ol>
+                            <li>Click the Apple menu (🍎) in the top left corner</li>
+                            <li>Click "System Settings" (or "System Preferences" on older Macs)</li>
+                            <li>Click "Network"</li>
+                            <li>Select your connection (Wi-Fi or Ethernet) from the left sidebar</li>
+                            <li>Click "Details..." or "Advanced..." (bottom right)</li>
+                            <li>Click the "DNS" tab</li>
+                            <li>Click the "+" button under DNS servers and add:
+                                <ul>
+                                    <li>✨ First entry: <code>1.1.1.1</code></li>
+                                    <li>✨ Second entry: <code>1.0.0.1</code></li>
+                                </ul>
+                            </li>
+                            <li>Click "OK" and then "Apply"</li>
+                            <li>You might need to turn Wi-Fi off and on again</li>
+                        </ol>
+
+                        <div class="troubleshooting-note">
+                            <p>💡 For Mac users who need to flush DNS:</p>
+                            <ul>
+                                <li>Open Terminal (use Spotlight - press Cmd + Space and type "Terminal")</li>
+                                <li>Type: <code>sudo killall -HUP mDNSResponder</code></li>
+                                <li>Enter your password when prompted</li>
+                                <li>Restart your browser</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="technical-note">
+                        <p>🤔 Still not working? Try these tips:</p>
+                        <ul>
+                            <li>Make sure you typed the numbers exactly: 1.1.1.1 and 1.0.0.1</li>
+                            <li>Try restarting your computer (yes, the old "turn it off and on again" really works!)</li>
+                            <li>If using Wi-Fi, try disconnecting and reconnecting to your network</li>
+                            <li>Clear your browser cache (Ctrl+Shift+Delete on Windows, Cmd+Shift+Delete on Mac)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section" id="success">
+                <h2>✨ Sweet Success</h2>
+                <div class="step">
+                    <span class="step-number">4</span>
+                    <h3>Victory Dance Time! 💃</h3>
+                    <p class="frustration">And just like that... Reddit is back! Time to catch up on all those memes! 🎉</p>
+                    <img src="https://imgur.com/2LnoyMq.png" alt="Successful Reddit access">
+                </div>
+            </div>
+
+            <div class="section" id="tech-notes">
+                <h2>📝 Tech Notes</h2>
+                <div class="technical-note">
+                    <p>Why Cloudflare DNS (1.1.1.1) is awesome:</p>
+                    <ul>
+                        <li>🔒 Super private - they don't sell your data!</li>
+                        <li>⚡ Lightning fast - zoom zoom!</li>
+                        <li>🛡️ Regular security updates - stay safe out there!</li>
+                        <li>🎯 Reliable as your morning coffee ☕</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add modal container at the end of body -->
+    <div id="imageModal" class="modal">
+        <span class="modal-close">&times;</span>
+        <img class="modal-content" id="expandedImg">
+    </div>
+
+    <!-- Add script before closing body tag -->
+    <script>
+        // Get the modal
+        const modal = document.getElementById("imageModal");
+        const modalImg = document.getElementById("expandedImg");
+        const closeBtn = document.getElementsByClassName("modal-close")[0];
+
+        // Get all images in the document
+        document.querySelectorAll('img:not(#expandedImg)').forEach(img => {
+            img.addEventListener('click', function() {
+                modal.style.display = "block";
+                modalImg.src = this.src;
+                modalImg.classList.add('zoom-in');
+            });
+        });
+
+        // Close modal when clicking X or outside the image
+        closeBtn.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        modal.onclick = function(event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape" && modal.style.display === "block") {
+                modal.style.display = "none";
+            }
+        });
+
+        // Remove animation class after animation ends
+        modalImg.addEventListener('animationend', function() {
+            this.classList.remove('zoom-in');
+        });
+    </script>
+</body>
+</html> 
