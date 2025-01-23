@@ -4,6 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>How I Fought Back Against Reddit Blocking! 🚀</title>
+
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="Fix Reddit Access: DNS Configuration Guide">
+    <meta name="description" content="Step-by-step guide to restore Reddit access when blocked by ISPs in Vietnam. Includes DNS configuration for Windows and Mac, with troubleshooting tips.">
+    <meta name="keywords" content="Reddit, DNS, ISP block, Vietnam, Cloudflare DNS, internet access, troubleshooting">
+    <meta name="author" content="JWCow">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://github.com/JWCow/Fix-reddit">
+    <meta property="og:title" content="Fix Reddit Access: DNS Configuration Guide">
+    <meta property="og:description" content="🚀 Restore Reddit access when blocked by ISPs! Step-by-step DNS configuration guide for Windows and Mac, with troubleshooting tips.">
+    <meta property="og:image" content="https://imgur.com/2LnoyMq.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://github.com/JWCow/Fix-reddit">
+    <meta property="twitter:title" content="Fix Reddit Access: DNS Configuration Guide">
+    <meta property="twitter:description" content="🔧 Can't access Reddit? Here's a complete guide to fix it using DNS configuration. Works for Windows & Mac! #Reddit #Tutorial">
+    <meta property="twitter:image" content="https://imgur.com/2LnoyMq.png">
+
+    <!-- Additional Meta -->
+    <meta name="theme-color" content="#121212">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    
     <style>
         :root {
             --primary-color: #bb86fc;
@@ -12,6 +39,8 @@
             --surface-color: #1e1e1e;
             --text-color: #ffffff;
             --text-secondary: #b0b0b0;
+            --gradient-start: #1a1a1a;
+            --gradient-end: #121212;
         }
         
         body {
@@ -20,7 +49,8 @@
             color: var(--text-color);
             margin: 0;
             padding: 0;
-            background-color: var(--bg-color);
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            min-height: 100vh;
         }
 
         .nav-sidebar {
@@ -85,6 +115,14 @@
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.3);
             border: 1px solid #333;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: transform 0.5s, opacity 0.5s;
+        }
+
+        .section.visible {
+            transform: translateY(0);
+            opacity: 1;
         }
 
         .step {
@@ -92,10 +130,11 @@
         }
 
         .step-number {
-            background-color: var(--primary-color);
-            color: var(--bg-color);
-            padding: 0.5rem 1rem;
-            border-radius: 4px;
+            position: relative;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            padding: 0.7rem 1.2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(187, 134, 252, 0.2);
             display: inline-block;
             margin-right: 1rem;
         }
@@ -240,6 +279,114 @@
                 padding: 1rem;
             }
         }
+
+        /* Progress Timeline */
+        .progress-bar {
+            position: sticky;
+            top: 0;
+            left: 250px;
+            right: 0;
+            background: var(--surface-color);
+            padding: 1rem;
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            border-bottom: 1px solid var(--primary-color);
+            backdrop-filter: blur(10px);
+        }
+
+        .progress-step {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            opacity: 0.5;
+            transition: opacity 0.3s;
+        }
+
+        .progress-step.active {
+            opacity: 1;
+        }
+
+        .progress-step .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--primary-color);
+        }
+
+        .progress-step .line {
+            width: 30px;
+            height: 2px;
+            background: var(--primary-color);
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--primary-color);
+            color: var(--bg-color);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s;
+            transform: translateY(100px);
+            box-shadow: 0 4px 12px rgba(187, 134, 252, 0.3);
+            z-index: 1000;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Time Estimate Tags */
+        .time-estimate {
+            display: inline-block;
+            background: rgba(187, 134, 252, 0.2);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-left: 1rem;
+            border: 1px solid var(--primary-color);
+        }
+
+        /* Collapsible Advanced Sections */
+        .advanced-toggle {
+            background: none;
+            border: 1px solid var(--secondary-color);
+            color: var(--secondary-color);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 1rem 0;
+            transition: all 0.3s;
+        }
+
+        .advanced-toggle:hover {
+            background: rgba(3, 218, 198, 0.1);
+        }
+
+        .advanced-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .advanced-content.expanded {
+            max-height: 1000px;
+        }
     </style>
 </head>
 <body>
@@ -258,14 +405,41 @@
             <h1>🚫 Reddit Blocked?! Here's How I Fixed It! 🎉</h1>
         </header>
 
+        <div class="progress-bar">
+            <div class="progress-step" data-step="overview">
+                <div class="dot"></div>
+                <span>Overview</span>
+            </div>
+            <div class="line"></div>
+            <div class="progress-step" data-step="problem">
+                <div class="dot"></div>
+                <span>Problem</span>
+            </div>
+            <div class="line"></div>
+            <div class="progress-step" data-step="browsers">
+                <div class="dot"></div>
+                <span>Testing</span>
+            </div>
+            <div class="line"></div>
+            <div class="progress-step" data-step="dns-solution">
+                <div class="dot"></div>
+                <span>Solution</span>
+            </div>
+            <div class="line"></div>
+            <div class="progress-step" data-step="success">
+                <div class="dot"></div>
+                <span>Success</span>
+            </div>
+        </div>
+
         <div class="container">
             <div class="section" id="overview">
-                <h2>🏠 Overview</h2>
+                <h2>🏠 Overview <span class="time-estimate">⏱️ 1 min read</span></h2>
                 <p>Hey there! If you're reading this, you're probably as frustrated as I was when Reddit suddenly stopped working in Vietnam. But don't worry - I've got your back! Here's how I went from "Reddit is down?!" to "Reddit is back, baby!" 🎉</p>
             </div>
 
             <div class="section" id="problem">
-                <h2>😤 The Problem</h2>
+                <h2>😤 The Problem <span class="time-estimate">⏱️ 2 min read</span></h2>
                 <div class="step">
                     <span class="step-number">1</span>
                     <h3>The Dreaded Block</h3>
@@ -291,7 +465,7 @@
             </div>
 
             <div class="section" id="dns-solution">
-                <h2>🛠️ The DNS Fix</h2>
+                <h2>🛠️ The DNS Fix <span class="time-estimate">⏱️ 5-10 min setup</span></h2>
                 <div class="technical-note">
                     <strong>🤓 Quick DNS Explainer:</strong>
                     <p>Think of DNS as the internet's phone book - it turns website names into addresses. By changing our DNS provider, we're basically asking someone else to look up those addresses for us!</p>
@@ -376,6 +550,10 @@
                         </ul>
                     </div>
                 </div>
+                <button class="advanced-toggle">🔧 Show Advanced Troubleshooting</button>
+                <div class="advanced-content">
+                    <!-- Move some of the troubleshooting content here -->
+                </div>
             </div>
 
             <div class="section" id="success">
@@ -402,6 +580,8 @@
             </div>
         </div>
     </div>
+
+    <div class="back-to-top">↑</div>
 
     <!-- Add modal container at the end of body -->
     <div id="imageModal" class="modal">
@@ -446,6 +626,52 @@
         // Remove animation class after animation ends
         modalImg.addEventListener('animationend', function() {
             this.classList.remove('zoom-in');
+        });
+
+        // Intersection Observer for sections
+        const sections = document.querySelectorAll('.section');
+        const progressSteps = document.querySelectorAll('.progress-step');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // Update progress bar
+                    const stepId = entry.target.id;
+                    progressSteps.forEach(step => {
+                        if (step.dataset.step === stepId) {
+                            step.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }, { threshold: 0.2 });
+
+        sections.forEach(section => observer.observe(section));
+
+        // Back to top button
+        const backToTop = document.querySelector('.back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Advanced toggles
+        document.querySelectorAll('.advanced-toggle').forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.nextElementSibling;
+                content.classList.toggle('expanded');
+                button.textContent = content.classList.contains('expanded') 
+                    ? '🔧 Hide Advanced Troubleshooting' 
+                    : '🔧 Show Advanced Troubleshooting';
+            });
         });
     </script>
 </body>
